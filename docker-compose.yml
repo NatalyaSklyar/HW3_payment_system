@@ -1,0 +1,28 @@
+---
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-example_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-example_password}
+      POSTGRES_DB: ${POSTGRES_DB:-example_db}
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    
+  payments:
+    build:
+      context: ./services/payments
+      dockerfile: Dockerfile
+    command: uvicorn payments.main:app --host 0.0.0.0 --port 8000
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-example_user}:${POSTGRES_PASSWORD:-example_password}@database:5432/${POSTGRES_DB:-example_db}
+    ports:
+      - "8081:8000"
+    depends_on:
+      - database
+
+volumes:
+  db_data:
+    driver: local
