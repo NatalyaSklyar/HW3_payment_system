@@ -1,9 +1,9 @@
+from typing import Annotated
+
 from fastapi import Depends
 from payments.repositories.base import Session
-from typing import Annotated
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
-
 from payments.services.account import AccountService
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 
 async def get_sessionmaker() -> async_sessionmaker[AsyncSession]:

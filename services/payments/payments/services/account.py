@@ -1,12 +1,12 @@
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from fastapi import HTTPException, status
 from payments.models.account import (
     AccountResponse,
-    WithdrawRequest,
-    DepositRequest,
     CreateAccountRequest,
+    DepositRequest,
+    WithdrawRequest,
 )
 from payments.repositories.accounts import AccountsRepository
-from fastapi import HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 
 class AccountService:

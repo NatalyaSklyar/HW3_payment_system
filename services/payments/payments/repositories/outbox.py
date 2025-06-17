@@ -1,8 +1,9 @@
 from collections.abc import Iterable
-from .base import PaymentOutboxEntry
+
+from sqlalchemy import delete, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import text
-from sqlalchemy import select, delete
+
+from .base import PaymentOutboxEntry
 
 
 class OutboxRepository:
