@@ -24,7 +24,7 @@ class Account(Base):
     __tablename__ = "accounts"
 
     user_id: Mapped[int] = mapped_column(primary_key=True)
-    balance: Mapped[int] = mapped_column(
+    balance: Mapped[Decimal] = mapped_column(
         Numeric(precision=10, scale=2), nullable=False, default=Decimal("0.00")
     )
 
